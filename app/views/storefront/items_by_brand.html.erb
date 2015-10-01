@@ -1,0 +1,25 @@
+<h1>Storefront#items_by_brand</h1>
+<p>Find me in app/views/storefront/items_by_brand.html.erb</p>
+
+<div class="row">
+    <% @products_by_brand.each do |product| %>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div style="height:150px;">
+            <%= image_tag product.image.url(:thumb) %>
+          </div>
+          <p><a href="#" data-toggle="modal" data-target="#myModal_<%= product.id %>">
+              <span class="glyphicon glyphicon-plus"></span> quick info
+          </a></p>
+          <p><strong><%= number_to_currency product.price %></strong></p>
+          <p><%= product.name %></p>
+          <div style="height:150px;">
+              <p><%= product.description %></p>
+          </div>
+              <p>Made by: <%= product.brand %></p>
+        </div><!-- panel-body -->
+      </div><!--panel panel-default -->
+    </div><!-- col-md-4 -->
+    <% end %>
+</div><!-- row -->

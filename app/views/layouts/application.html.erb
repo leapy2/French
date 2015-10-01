@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EGet</title>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" %>  
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-brand">
+      <strong><%= link_to "Eget", root_path, class: "navebar-brand" %></strong>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+         <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+           aria-expanded="false">Find By Category<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <% Category.all.each do |cat| %>
+             <li><%= link_to cat.name, categorical_path(cat_id: cat.id) %></li>
+             <% end %>
+         </ul>
+         </li>
+         
+         <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+           aria-expanded="false">Find By Brand<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <% @brands.each do |brand| %>
+           <li><%= link_to brand, branding_path(brand: brand) %></li>
+             <% end %>
+         </ul>
+         </li>
+      </ul><!-- /nav navbar-nav -->
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+        <li><%= link_to "View Cart", view_order_path %></li>
+        <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+        <% else %>
+        <li><%= link_to "Sign In", new_user_session_path %></li>
+        <li><%= link_to "Forgot Password", user_password_path %></li>
+        <% end %>
+       </ul>
+    </div><!-- /collapse .navbar-collapse -->
+  </div><!-- /.container-fluid -->
+  </nav>
+  
+
+<div class="container container-custom">
+<%= yield %>
+</div>
+
+</body>
+</html>
